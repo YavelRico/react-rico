@@ -8,7 +8,15 @@ function Item({ product }) {
   const handleAddToCart = () => {
     if (quantity > 0) {
       addToCart({ ...product, quantity });
-      setQuantity(0); // Restablecer la cantidad a 0 después de agregar al carrito
+
+   
+      const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    
+      const updatedCart = [...currentCart, { ...product, quantity }];
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+      setQuantity(0); 
     }
   };
 
@@ -38,3 +46,4 @@ function Item({ product }) {
 }
 
 export default Item;
+
